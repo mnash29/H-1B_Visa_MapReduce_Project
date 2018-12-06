@@ -68,5 +68,31 @@ This may take a little while.
 1. Distribute the dataset to the HDFS input directory you created.  
 `hadoop fs -put input/h1b_kaggle.csv input`  
 Note that the first path "input/h1b_kaggle.csv" is from your input dir within your current dir (proj4), while the second path is the path to the input directory on HDFS.
+1. Run the first job.  While the map and reduce tasks shouldn't take more than a minute, this process may take a 3-4 minutes presumably because of communication and I/O being handled remotely.  
+`hadoop jar TopEmployers.jar TopEmployers input/h1b_kaggle.csv TopEmployers_output`  
+Output will be written to a new HDFS directory called "TopEmployers_output"
+1. OPTIONAL: Once the job is finished, you may display the output.  
+`hadoop fs -cat TopEmployers_output/part-r-00000`
+1. Save the output file to $SCRATCH/proj4/output since your HDFS will be destroyed after your interact session is over.  
+`hadoop fs -get TopEmployers_output/part-r-00000 output/TopEmployers_Output.txt`  
+NOTE: This will not work if your $SCRATCH/proj4/output directory already contains files by these names.
+1. Run the second job.  Again, the process may take a few minutes.  
+`hadoop jar TopJobTypesApproved.jar TopJobTypesApproved input/h1b_kaggle.csv TopJobTypesApproved_output`
+1. OPTIONAL: Once the job is finished, you may display the output.  
+`hadoop fs -cat TopJobTypesApproved_output/part-r-00000`
+1. Save the output file to $SCRATCH/proj4/output since your HDFS will be destroyed after your interact session is over.  
+`hadoop fs -get TopJobTypesApproved_output/part-r-00000 output/TopJobTypesApproved_Output.txt`
+1. Type `exit` to end the session once both jobs are complete.
+1. Navigate to $SCRATCH/proj4/output to see the output files.
+1. To get them to your local machine, do the following. Otherwise you are done. 
+From the home directory in bridges...  
+`mv $SCRATCH/proj4/output/TopJobTypesApproved_Output.txt $SCRATCH/proj4/output/TopEmployers_Output.txt .`  
+This will move the output files into the home directory so that you can use sftp get to move them to your local machine.  
+1. In a separate terminal, connect to bridges via sftp.  
+`sftp username@data.bridges.psc.edu` Substitute your username.  
+Once connected, run the following commands to get the output files from bridges.  
+`get TopEmployers_Output.txt`  
+`get TopJobTypesApproved_Output.txt` 
+1. The output files will be stored in the directory you were in when you connected to bridges via sftp.
 
-
+### END

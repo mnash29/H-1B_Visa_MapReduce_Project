@@ -17,6 +17,46 @@ __In Scripts directory :__
 * __project4.sh__ - A script used on bridges when testing changes to the MapReduce jobs. Only for reference, grader should not run this because it won't work with default file structure.
 * __demo.sh__ - Script used to demo the project on presentation day. Requires specific file structure already set up on my bridges workspace. Skips compiling MapReduce jobs because this is done before-hand.
 
+__In GLOBE/CSS directory :__
+* __globe.css__ - Style sheets for use in index.html.
+
+__In GLOBE/DATA directory :__
+* __acc_coords.csv__ - CSV file for Accenture geo coords.
+* __cog_coords.csv__ - CSV file for Cognizant geo coords.
+* __delo_coords.csv__ - CSV file for Deliotte geo coords.
+* __ernst_coords.csv__ - CSV file for Ernst & Young geo coords.
+* __hcl_coords.csv__ - CSV file for HCL America geo coords.
+* __ibm_coords.csv__ - CSV file for IBM geo coords.
+* __info_coords.csv__ - CSV file for Infosys geo coords.
+* __mic_coords.csv__ - CSV file for Microsoft geo coords.
+* __tata_coords.csv__ - CSV file for Tata geo coords.
+* __wip_coords.csv__ - CSV file for Wipro geo coords.
+* __emp_data.json__ - JSON file of coordinates for use in geo data visualization.
+* __h1b_kaggle.csv__ - CSV data file used in the Map/Reduce jobs.
+* __top_employers.csv__ - output of top 10 employers Map/Reduce job.
+* __top_jobs.csv__ - output of top 10 jobs Map/Reduce job.
+
+__In GLOBE/IMG directory :__ 
+* __apps_by_year.jph__ - Image of applications by year.
+* __certs_by_year.jpg__ - Image of certifications by year.
+* __top_emp.jpg__ - Image of top employers output.
+* __top_jobs.jpg__ - Image of top jobs output.
+* __wage_breakdown.jpg__ - Image of wage breakdown.
+* __world.jpg__ - Image overlayed over WebGL mesh object displayed in index.html.
+
+__In GLOBE/IPY directory :__
+* __data_vis.ipynb__ - IPython code file for data visualization.
+* __get_coords.ipynb__ - IPython code file for aquiring geo coordinate data.
+
+__In GLOBE/JS directory :__
+* __Detector.js__ - Environment detection javascript file. Used for globe.
+* __globe.js__ - Uses geo coordinatesa to create objects placed on globe.
+* __three.min.js__ - Javascript library used to create and display animated 3D computer graphics in browser.
+* __Tween.js__ - Javascript library used for animating HTML5 and Javascript properties.
+
+__In GLOBE directory :__
+* __index.html__ - HTML file used to create containers for globe and data visualization.
+
 ## Execution Times and Output Description:
 __"Employers With Top Application Submissions" (TopEmployers.java) job Execution Time :__
 * Total time spent by all map tasks (ms)=31266
@@ -94,5 +134,15 @@ Once connected, run the following commands to get the output files from bridges.
 `get TopEmployers_Output.txt`  
 `get TopJobTypesApproved_Output.txt` 
 1. The output files will be stored in the directory you were in when you connected to bridges via sftp.
+
+## GLOBE SETUP :
+# This setup assumes that NodeJS and the Node Package Manager(npm) is already installed.
+1. Install http-server globally.
+`npm install http-server -g`
+2. Navigate to directory containing the "globe" directory.
+3. Run http-server
+`http-server`
+4. Open browser go to the localhost:8080 page (The port will be different if you didn't use the default port #).
+5. Click on "/globe/" directory in browser.
 
 ### END

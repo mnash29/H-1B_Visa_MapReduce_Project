@@ -1,0 +1,131 @@
+html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000000 url(/globe/loading.gif) center center no-repeat;
+        color: #ffffff;
+        font-family: Raleway, sans-serif;
+        font-size: 13px;
+        line-height: 20px;
+        height: 100%;
+      }
+
+      #info {
+
+        font-size: 11px;
+        position: absolute;
+        bottom: 5px;
+        background-color: rgba(0,0,0,0.8);
+        border-radius: 3px;
+        right: 10px;
+        padding: 10px;
+
+      }
+
+      #currentInfo {
+        width: 270px;
+        position: absolute;
+        left: 20px;
+        top: 63px;
+		margin-top: 25px;
+        background-color: rgba(0,0,0,0.2);
+        padding: 10px;
+      }
+
+      a {
+        color: #aaa;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .bull {
+        padding: 0 5px;
+        color: #555;
+      }
+
+      #title {
+        position: absolute;
+        top: 20px;
+        width: 25%;
+        left: 20px;
+        background-color: rgba(0,0,0,0.2);
+		    border-bottom: 1px solid rgba(255,255,255,0.4);
+        border-radius: 3px;
+        font: 32px Raleway;
+        color: #4da0ff;
+        padding: 10px;
+      }
+
+      .year {
+        font: 18px Raleway;
+        line-height: 26px;
+        height: 30px;
+        text-align: left;
+        width: 200px;
+        color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        -webkit-transition: all 0.1s ease-out;
+      }
+
+      .year:hover, .year.active {
+        font-size: 28px;
+        color: #fff;
+      }
+
+      #ce span {
+        display: none;
+      }
+
+      #ce {
+        width: 107px;
+        height: 55px;
+        display: block;
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        background: url(/globe/ce.png)
+      }
+	  
+	  .time {
+		position: absolute;
+		bottom: 0%;
+		width: 100%
+	  }
+	  
+	  .popup {
+		position: absolute;
+		display: none;
+        margin: 10px 0px;
+		top: 35%;
+		font-size: 26px;
+		left: 10%;
+		width: 30%;
+        min-height: 80px
+	  }
+	  .popup h2 {
+		color: #FFDF00
+	  }
+	  
+	  .btn-stylish {
+		padding: 0px;
+	    font: 34px Raleway;
+		background: transparent;
+		position: absolute;
+		top: 100px;
+		left: 1%;
+	  }
+	  
+	  .btn.focus, .btn:focus, .btn:hover {
+		color: white;
+		text-decoration: none;
+	  }
+
+    .dropdown-list {
+      background: transparent;
+      top: 135px;
+      left: 1%;
+    }

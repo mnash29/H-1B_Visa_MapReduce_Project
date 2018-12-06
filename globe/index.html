@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>WebGL Globe</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+  <!-- Globe Container -->
+  <div id="container"></div>
+
+  <!-- Dropdown Menu -->
+  <div id="dd" class="dropdown open">
+  <button id="dropdown" class="btn btn-stylish dropdown-toggle" type="button" onclick="onDropdownClick(this)">Employers
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu dropdown-list">
+    <li><span id="Accenture" class="year"></span></li>
+    <li><span id="Cognizant" class="year"></span></li>
+    <li><span id="Deliotte" class="year"></span></li>
+    <li><span id="Ernst & Young" class="year"></span></li>
+    <li><span id="HCL America" class="year"></span></li>
+    <li><span id="IBM" class="year"></span></li>
+    <li><span id="Infosys" class="year"></span></li>
+    <li><span id="Microsoft" class="year"></span></li>
+    <li><span id="Tata" class="year"></span></li>
+    <li><span id="Wipro" class="year"></span></li>
+  </ul>
+  </div>
+
+  <div id="title">
+    <b>Top Employers by Location</b>
+  </div>
+
+  <!-- Popup Container -->
+  <div id="popupList"></div>
+
+  <!-- Globe Links -->
+  <script type="text/javascript" src="/globe/js/Detector.js"></script>
+  <script type="text/javascript" src="/globe/js/three.min.js"></script>
+  <script type="text/javascript" src="/globe/js/Tween.js"></script>
+  <script type="text/javascript" src="/globe/js/globe.js"></script>
+  <link type="text/css" href="./css/globe.css" rel="stylesheet">
+  
+  <script type="text/javascript">
+  /****************************************************************
+      Globe Script 
+  *****************************************************************/
+
+  //document.getElementById('dropdown').click();
+  if(!Detector.webgl){
+    Detector.addGetWebGLMessage();
+  } 
+  else {
+    // Employers array for use in dropdown menu
+    // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const emps = ["Accenture", "Cognizant", "Deliotte", "Ernst & Young", "HCL America", "IBM", "Infosys", "Microsoft", "Tata", "Wipro"];
+
+    // Get globe container element
+    const container = document.getElementById("container");
+    const globe = new DAT.Globe(container);
+    let i, tweens = [];
+    
+    /****************************************************************
+      settime function changes data visualization on globe and
+      changes the class attributes for the active element 
+    *****************************************************************/
+    let settime = function(globe, t) {
+      return function() {
+
+        // Tween call to change data and set animation easing
+        new TWEEN.Tween(globe).to({time: t/10 },500).easing(TWEEN.Easing.Cubic.EaseOut).start();
+
+        // Change class attribute for active element
+        const y = document.getElementById(emps[t]);
+        if (y.getAttribute("class") === "year active") {
+          return;
+        }
+        const yy = document.getElementsByClassName("year");
+        for(i=0; i<yy.length; i++) {
+          yy[i].setAttribute("class","year");
+        }
+        y.setAttribute("class", "year active");
+      };
+    };
+    
+    // Adds a listener for a mouseover event 
+    // Makes call to settime function
+    for(let i = 0; i<emps.length; i++) {
+      const y = document.getElementById(emps[i]);
+      y.addEventListener("mouseover", settime(globe,i), false);
+    }
+
+    /****************************************************************
+      GET request to open data file and calls addData function from
+      globe.js module
+    *****************************************************************/
+    let xhr;
+    TWEEN.start();
+  
+	  xhr = new XMLHttpRequest();
+    xhr.open("GET", "./data/emp_data.json", true);
+    xhr.onreadystatechange = function(e) {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            let data = JSON.parse(xhr.responseText);
+            window.data = data;
+            for(emp in emps) {
+				      globe.addData(data[emp][1], {format: "magnitude", name: data[emp][0], animated: true});
+              document.getElementById(emps[emp]).innerHTML = data[emp][0];
+			      }
+            globe.createPoints();
+            settime(globe,0)();
+            globe.animate();
+            document.body.style.backgroundImage = "none"; // remove loading
+          }
+        }
+      };
+    xhr.send();
+  }
+  </script>
+  
+  </body>
+</html>

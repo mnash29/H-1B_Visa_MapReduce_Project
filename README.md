@@ -84,7 +84,7 @@ NOTE: This will not work if your $SCRATCH/proj4/output directory already contain
 `hadoop fs -get TopJobTypesApproved_output/part-r-00000 output/TopJobTypesApproved_Output.txt`
 1. Type `exit` to end the session once both jobs are complete.
 1. Navigate to $SCRATCH/proj4/output to see the output files.
-1. To get them to your local machine, do the following. Otherwise you are done. 
+1. To get them to your local machine, do the following. Otherwise you are done.  
 From the home directory in bridges...  
 `mv $SCRATCH/proj4/output/TopJobTypesApproved_Output.txt $SCRATCH/proj4/output/TopEmployers_Output.txt .`  
 This will move the output files into the home directory so that you can use sftp get to move them to your local machine.  
